@@ -14,6 +14,7 @@ import lombok.Getter;
 public enum AppCode implements StatusCode{
 
     APP_ERROR(2000, "业务异常"),
+    ORDER_NOT_EXIST(2003, "订单不存在"),
     PRICE_ERROR(2001, "价格异常");
 
     private Integer code;

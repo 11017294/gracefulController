@@ -1,5 +1,7 @@
 package com.chen.gracefulcontroller.grace.service;
 
+import com.chen.gracefulcontroller.grace.global.myEnum.AppCode;
+import com.chen.gracefulcontroller.grace.global.myException.APIException;
 import com.chen.gracefulcontroller.grace.pojo.vo.ProductInfoQueryVo;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ import java.util.List;
 public class ProductInfoService {
 
     public ProductInfoQueryVo findById(Integer id) {
+        if(id == null) {
+            throw new APIException(AppCode.ORDER_NOT_EXIST, "订单号不存在：" + id);
+        }
         ProductInfoQueryVo productInfoQueryVo = new ProductInfoQueryVo();
         productInfoQueryVo.setProductId(id);
         productInfoQueryVo.setProductName("测试");
