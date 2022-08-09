@@ -1,5 +1,6 @@
 package com.chen.gracefulcontroller.grace.global.restControllerAdvice;
 
+import com.chen.gracefulcontroller.grace.annotation.NotControllerResponseAdvice;
 import com.chen.gracefulcontroller.grace.global.myEnum.ResultCode;
 import com.chen.gracefulcontroller.grace.global.myException.APIException;
 import com.chen.gracefulcontroller.grace.pojo.vo.ResultVo;
@@ -26,6 +27,11 @@ public class ControllerResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     public boolean supports(MethodParameter methodParameter, Class<? extends HttpMessageConverter<?>> aClass) {
+        // 类和方法上被标注，不进行拦截封装
+        if (methodParameter.getDeclaringClass().isAnnotationPresent(NotControllerResponseAdvice.class)
+                || methodParameter.getMethod().isAnnotationPresent(NotControllerResponseAdvice .class)){
+            return false;
+        }
         return !methodParameter.getParameterType().isAssignableFrom(ResultVo.class);
     }
 

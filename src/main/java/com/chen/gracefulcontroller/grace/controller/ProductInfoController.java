@@ -1,5 +1,6 @@
 package com.chen.gracefulcontroller.grace.controller;
 
+import com.chen.gracefulcontroller.grace.annotation.NotControllerResponseAdvice;
 import com.chen.gracefulcontroller.grace.pojo.vo.ProductInfoQueryVo;
 import com.chen.gracefulcontroller.grace.service.ProductInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class ProductInfoController {
     }
 
     @GetMapping("/list")
+    @NotControllerResponseAdvice
     public List<ProductInfoQueryVo> getList(@Validated ProductInfoQueryVo productInfoQueryVo) {
         return productInfoService.getList(productInfoQueryVo);
     }
